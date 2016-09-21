@@ -4,8 +4,15 @@
 hours = raw_input("Enter hours worked:")
 rate  = raw_input("Enter pay per hour:")
 
-hours = float(hours)
-rate = float(rate)
+try :
+  hours = float(hours)
+except :
+   print "Invalid input for hours"
+   
+try :
+  rate = float(rate)
+except :
+   print "Invalid input for rate"
 
 if hours > 40 :
    pay = 40 * rate + (hours - 40) * (1.5 * rate)
