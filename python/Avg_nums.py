@@ -18,7 +18,7 @@ while True:
   if catch_error(num) is None :
     continue
   else :
-    total = total + num
+    total = total + float(num)
     count = count + 1
 
 print "Average is:", total/count
