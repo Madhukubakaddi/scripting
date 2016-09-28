@@ -3,7 +3,6 @@
 echo "SDK_PATH:$SDK"
 cd $SDK
 
-if false ; then
 # Check if the number of arguments($#) passed is nil
 if [ $# -eq 0 ]
 then        
@@ -66,7 +65,7 @@ then
    cd $SDK/systems/linux/user/iproc-3_6
    make -s   
 fi   
-fi
+
 
 ## The function has be declared before it can be used
 browser () {
