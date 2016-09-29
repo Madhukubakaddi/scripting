@@ -11,7 +11,8 @@ for line in mail_handler :
       split_line = line.split()
       email = split_line[1]
       name = email.split('@')[0]
-      name_lst.append(name)
+      if name not in name_lst :
+         name_lst.append(name)
       num_of_mail = num_of_mail + 1
 
-print name_lst, num_of_mail
+print name_lst, num_of_mail 
