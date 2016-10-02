@@ -18,6 +18,7 @@ class party():
 # Creating two instances/objects of the same class, where state of each instance/object is maintained independently
 birthday = party("birthday")
 marriage = party("marriage")
+# The below method call is can be interpreted as party.start(birthday)
 birthday.start()
 birthday.start()
 marriage.start()
