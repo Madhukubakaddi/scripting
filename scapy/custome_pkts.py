@@ -13,3 +13,6 @@ class MPLS(Packet):
                     ByteField("ttl", 0)  ] 
 
 bind_layers(Ether, MPLS, type=0x8847)
+
+label = MPLS()
+print hexdump(str(a))
