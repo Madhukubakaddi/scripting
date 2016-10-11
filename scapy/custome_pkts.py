@@ -5,15 +5,9 @@ from scapy.all import *
 # ByteField - 1Byte integer field
 # ShortField - 2Byte integer field
 # IntEnumField - 4Byte integer field (Has enumerated values)
-class MPLS(Packet): 
-   name = "MPLS" 
-   fields_desc =  [ BitField("label", 3, 20), 
-                    BitField("cos", 0, 3), 
-                    BitField("s", 1, 1), 
-                    ByteField("ttl", 0)  ] 
 
-bind_layers(Ether, MPLS, type=0x8847)
 
+# Layer2 tags
 class VNTAG(Packet): 
    name = "VNTAG" 
    fields_desc =  [ BitField("dir", 0, 1), 
@@ -30,7 +24,32 @@ class ETAG(Packet):
                     BitField("de", 0, 1), 
                     BitField("svid", 0x123, 12), 
                     BitField("rr", 0, 2),
-                    BitField("vid", 0, 14)]    
+                    BitField("vid", 0, 14)]  
+   
+class CNTAG(Packet): 
+   name = "CNTAG" 
+   fields_desc =  [ ShortField("rpid", 0)]
+   
+class CNM(Packet): 
+   name = "CNM" 
+   fields_desc =  [ BitField("ver", 0, 4), 
+                    BitField("rsvd", 0, 6), 
+                    BitField("QntzFb", 0, 6), 
+                    BitField("CPID", 0, 48),
+                    ShortField("CNMQoffset", 0),
+                    ShortField("CNMQDelta", 0),
+                    BitField("DMAC", 0, 48),
+                    ShortField("MSDUlen", 0)]                 
+             
+class MPLS(Packet): 
+   name = "MPLS" 
+   fields_desc =  [ BitField("label", 3, 20), 
+                    BitField("cos", 0, 3), 
+                    BitField("s", 1, 1), 
+                    ByteField("ttl", 0)  ] 
+
+bind_layers(Ether, MPLS, type=0x8847)
+
 
 label = MPLS()
 print hexdump(str(a))
