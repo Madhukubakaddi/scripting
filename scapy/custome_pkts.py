@@ -8,6 +8,11 @@ from scapy.all import *
 
 
 # Layer2 tags
+# TPID definitions for various tags
+vntpid = 0x8838
+etpid = 0x8839
+cntpid = 0x8840
+
 class VNTAG(Packet): 
    name = "VNTAG" 
    fields_desc =  [ BitField("dir", 0, 1), 
@@ -16,7 +21,8 @@ class VNTAG(Packet):
                     BitField("l", 0, 1),
                     BitField("rsvd", 0, 1), 
                     BitField("ver", 0, 2), 
-                    BitField("src_vif", 0, 12) ] 
+                    BitField("src_vif", 0, 12)] 
+bind_layers(Ether, VNTAG, type=vntpid)
    
 class ETAG(Packet): 
    name = "ETAG" 
@@ -26,9 +32,13 @@ class ETAG(Packet):
                     BitField("rr", 0, 2),
                     BitField("vid", 0, 14)]  
    
+bind_layers(Ether, ETAG, type=etpid)   
+   
 class CNTAG(Packet): 
    name = "CNTAG" 
    fields_desc =  [ ShortField("rpid", 0)]
+
+bind_layers(Ether, CNTAG, type=cntpid)
    
 class CNM(Packet): 
    name = "CNM" 
