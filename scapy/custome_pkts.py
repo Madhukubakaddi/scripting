@@ -7,7 +7,7 @@ from scapy.all import *
 # IntEnumField - 4Byte integer field (Has enumerated values)
 
 
-# Layer2 tags
+# Layer2 headers
 # TPID definitions for various tags
 vntpid = 0x8838
 etpid = 0x8839
@@ -49,8 +49,16 @@ class CNM(Packet):
                     ShortField("CNMQoffset", 0),
                     ShortField("CNMQDelta", 0),
                     BitField("DMAC", 0, 48),
-                    ShortField("MSDUlen", 0)]                 
-             
+                    ShortField("MSDUlen", 0)]  
+class MiM(Packet): 
+   name = "MiM" 
+   fields_desc =  [ BitField("pcp", 0, 3), 
+                    BitField("de", 0, 1), 
+                    BitField("nca", 0, 1), 
+                    BitField("ISID", 0,24)] 
+   
+bind_layers(Ether, MiM, type=0x88e7)
+
 class MPLS(Packet): 
    name = "MPLS" 
    fields_desc =  [ BitField("label", 3, 20), 
